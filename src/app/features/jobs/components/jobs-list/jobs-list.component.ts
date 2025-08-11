@@ -41,7 +41,7 @@ export class JobsListComponent {
             return jobs;
           }),
           catchError(err => {
-            this.errorMessage = err.message || 'Failed to load jobs.';
+            this.errorMessage = 'Failed to load jobs.';
             this.noJobsFound = false;
             this.loading = false;
             return of([]);

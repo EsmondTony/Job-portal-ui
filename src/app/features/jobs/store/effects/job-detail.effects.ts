@@ -18,9 +18,9 @@ export class JobDetailEffects {
             if (jobResponse.data && jobResponse.data.job) {
               return JobDetailActions.loadJobDetailSuccess({ job: jobResponse.data.job });
             } else {
-              return JobDetailActions.loadJobDetailFailure({ error: jobResponse.message || 'Job not found' });
+              return JobDetailActions.loadJobDetailFailure({ error: 'Job not found' });
             }
-          }), catchError(error => of(JobDetailActions.loadJobDetailFailure({ error: error.message || 'Failed to load job detail' })))
+          }), catchError(error => of(JobDetailActions.loadJobDetailFailure({ error: 'Failed to load job detail' })))
         )
       )
     )
