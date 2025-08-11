@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout__body {
+  flex: 1;
+}
+
+.layout__main-content {
+  // padding: 2rem 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+}

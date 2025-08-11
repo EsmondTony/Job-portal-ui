@@ -1,0 +1,135 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4a90e2, #50e3c2);
+  padding: 1rem;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.login-form {
+  background-color: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInUp 0.6s ease forwards;
+
+  &__title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #212121;
+    text-align: center;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #555;
+    user-select: none;
+  }
+
+  &__input {
+    padding: 0.65rem 0.75rem;
+    font-size: 1rem;
+    border: 1.8px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+
+    &:focus {
+      border-color: #4a90e2;
+      box-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+      outline: none;
+    }
+
+    &.invalid {
+      border-color: #e74c3c;
+      box-shadow: 0 0 6px rgba(231, 76, 60, 0.7);
+    }
+  }
+
+  &__error {
+    margin-top: 0.25rem;
+    color: #e74c3c;
+    font-size: 0.85rem;
+    min-height: 1.1rem;
+    user-select: none;
+  }
+
+  &__button {
+    background-color: #4a90e2;
+    color: #fff;
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background-color: #357ABD;
+      box-shadow: 0 8px 16px rgba(53, 122, 189, 0.4);
+    }
+
+    &:disabled {
+      background-color: #a0c4ff;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+
+  &__server-error {
+    margin-top: 0.5rem;
+    color: #c0392b;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    user-select: none;
+    animation: shake 0.5s;
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-form {
+    padding: 2rem 1.5rem;
+    max-width: 100%;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-8px);
+  }
+  40%, 80% {
+    transform: translateX(8px);
+  }
+}

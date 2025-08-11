@@ -1,0 +1,21 @@
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo">Job Portal</div>
+
+    <!-- Hamburger Button -->
+    <button
+      class="header__menu-btn"
+      (click)="toggleMenu()"
+      aria-label="Toggle menu"
+    >
+      <span class="header__menu-icon"></span>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="header__nav" [class.header__nav--open]="isMenuOpen">
+      <a routerLink="/job" class="header__link" routerLinkActive="header__link--active" [routerLinkActiveOptions]="{ exact: true }">Jobs</a>
+      <a routerLink="/admin" class="header__link" routerLinkActive="header__link--active" [routerLinkActiveOptions]="{ exact: true }">Admin</a>
+      <button class="header__logout-btn" (click)="logout()">Logout</button>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,56 @@
+<div class="jobs-list-container">
+
+  <!-- Loading Spinner -->
+   <app-loader *ngIf="loading"></app-loader>
+
+  <!-- Error Alert -->
+  <div *ngIf="errorMessage" class="alert alert-error">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="deleteError" class="alert alert-error">{{ deleteError }}</div>
+
+  <!-- Jobs Filter -->
+  <div class="jobs-list__filter" *ngIf="!errorMessage && !isAdmin">
+    <label for="type" class="jobs-list__filter-label">Filter by Type:</label>
+    <select id="type" class="jobs-list__filter-select" [ngModel]="selectedType" (ngModelChange)="onTypeChange($event)">
+      <option value="All">All</option>
+      <option value="Full-time">Full-time</option>
+      <option value="Part-time">Part-time</option>
+    </select>
+  </div>
+
+  <!-- Dsiplay jobs -->
+  <div *ngIf="jobs$ | async as jobs">
+    <ng-container *ngIf="(jobs | jobTypeFilter:selectedType) as filteredJobs">
+
+      <!-- Server returned zero jobs -->
+      <div *ngIf="!errorMessage && jobs.length === 0" class="alert alert-info">
+        No jobs found.
+      </div>
+
+      <!-- Server returned jobs but none match the selected filter -->
+      <div *ngIf="!errorMessage && jobs.length > 0 && filteredJobs.length === 0" class="alert alert-info">
+        No jobs match the selected filter.
+      </div>
+
+      <!-- Jobs Grid -->
+      <div class="jobs-grid" *ngIf="filteredJobs.length > 0">
+        <div *ngFor="let job of filteredJobs" class="job-card" (click)="goToJobDetail(job._id)">
+          <h3 class="job-card__title">{{ job.title }}</h3>
+          <p class="job-card__desc">{{ job.description }}</p>
+
+          <div class="job-card__meta">
+            <span class="job-card__salary">{{ job.salary | currency }}</span>
+            <span class="job-card__type">{{ job.type }}</span>
+            <small class="job-card__date">Posted: {{ job.postedDate | date:'mediumDate' }}</small>
+          </div>
+          <!-- Delete Button only for admin -->
+          <button *ngIf="isAdmin" class="btn btn-danger" (click)="onDelete($event, job._id ,job.title)">
+            Delete
+          </button>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+</div>

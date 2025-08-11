@@ -1,0 +1,37 @@
+<form [formGroup]="jobForm" (ngSubmit)="submit()" class="job-form">
+  <div class="job-form__group">
+    <label for="title" class="job-form__label">Title</label>
+    <input id="title" class="job-form__input" formControlName="title" type="text" />
+    <div *ngIf="jobForm.get('title')?.invalid && jobForm.get('title')?.touched" class="job-form__error">
+      Title is required (min 3 chars)
+    </div>
+  </div>
+
+  <div class="job-form__group">
+    <label for="description" class="job-form__label">Description</label>
+    <textarea id="description" class="job-form__textarea" formControlName="description"></textarea>
+    <div *ngIf="jobForm.get('description')?.invalid && jobForm.get('description')?.touched" class="job-form__error">
+      Description is required (min 10 chars)
+    </div>
+  </div>
+
+  <div class="job-form__group">
+    <label for="salary" class="job-form__label">Salary</label>
+    <input id="salary" class="job-form__input" formControlName="salary" type="number" />
+    <div *ngIf="jobForm.get('salary')?.invalid && jobForm.get('salary')?.touched" class="job-form__error">
+      Salary must be greater than 0
+    </div>
+  </div>
+
+  <div class="job-form__group">
+    <label for="type" class="job-form__label">Type</label>
+    <select id="type" class="job-form__select" formControlName="type">
+      <option value="Full-time">Full-time</option>
+      <option value="Part-time">Part-time</option>
+    </select>
+  </div>
+
+  <button type="submit" class="job-form__button" [disabled]="jobForm.invalid">Add Job</button>
+</form>
+
+<app-jobs-list [isAdmin]="true" (deleteJob)="handleDeleteJob($event)"></app-jobs-list>

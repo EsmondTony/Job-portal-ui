@@ -1,0 +1,14 @@
+<app-loader *showElement="loading$ | async" class="loading"></app-loader>
+
+<div *ngIf="error$ | async as error" class="error-message">
+  {{ error }}
+</div>
+<div class="job-card-conatiner">
+  <div *ngIf="job$ | async as job" class="job-card">
+    <h2 class="job-card__title">{{ job.title }}</h2>
+    <p class="job-card__description">{{ job.description }}</p>
+    <p class="job-card__salary">Salary: {{ job.salary | salaryFormat :'$' }}</p>
+    <p class="job-card__type">Type: {{ job.type }}</p>
+    <p class="job-card__date">Posted on: {{ job.postedDate | date:'mediumDate' }}</p>
+  </div>
+</div>

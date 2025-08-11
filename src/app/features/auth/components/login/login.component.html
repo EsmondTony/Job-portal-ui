@@ -1,0 +1,45 @@
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" novalidate>
+    <h2 class="login-form__title">Sign In</h2>
+
+    <div class="login-form__group">
+      <label for="email" class="login-form__label">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        class="login-form__input"
+        placeholder="Enter your email"
+        [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+      />
+      <div class="login-form__error" *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched">
+        <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+      </div>
+    </div>
+
+    <div class="login-form__group">
+      <label for="password" class="login-form__label">Password</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        class="login-form__input"
+        placeholder="Enter your password"
+        [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+      />
+      <div class="login-form__error" *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched">
+        <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+        <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
+          Password must be at least 8 characters.
+        </small>
+      </div>
+    </div>
+
+    <button type="submit" class="login-form__button" [disabled]="loginForm.invalid">Login</button>
+
+    <div *ngIf="errorMessage" class="login-form__server-error">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>
